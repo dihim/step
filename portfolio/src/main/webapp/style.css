@@ -40,3 +40,17 @@ a {
     margin-left: auto;
     padding-right: 100px;
 }
+
+.home-section1 {
+    margin-top: 7em;
+    margin-left: 10em;
+    display: flex;
+    flex-direction: row;
+}
+
+.home-section1-desc {
+    display: flex;
+    flex-direction: column;
+    color: #0a2342;
+    margin-left: 3em;
+}
