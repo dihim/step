@@ -34,9 +34,10 @@
         <artifactId>appengine-maven-plugin</artifactId>
         <version>2.2.0</version>
         <configuration>
-          <!-- TODO: set project ID. -->
-          <deploy.projectId>YOUR_PROJECT_ID_HERE</deploy.projectId>
+          <deploy.projectId>dihim-step-2020</deploy.projectId>
           <deploy.version>1</deploy.version>
+          <port>8081</port>
+          <address>0.0.0.0</address> 
         </configuration>
       </plugin>
     </plugins>
