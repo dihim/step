@@ -1,3 +1,6 @@
+body {
+    margin: 0;
+}
 #content {
     height:100%;
     width:100%;
@@ -8,8 +11,7 @@
 }
 
 .toolbar {
-    margin-top: 5em;
-    margin-left: 5em;
+    padding-top: 5em;
     display: flex;
     flex-direction: row;
     height: 5em;
@@ -18,7 +20,7 @@
 }
 
 .toolbar-links {
-    margin-right: "100px";
+    padding-left: 5em;
     color: #0a2342;
     font: 2.5em "Courier New";
     
@@ -73,3 +75,27 @@ a {
     height: 25em;
     width: 25em;
 }
+
+#recent-projects {
+    height: 50em;
+    width: 100%;
+    background-color: #0a2342;
+}
+
+.recent-projects-title {
+    color: white;
+    font: 4em 'Courier New', sans-serif;
+    padding-top: 1em;
+    padding-left: 2em;
+    
+}
+
+.recent-projects-list {
+    margin: 0;
+    color: white;
+    font: 3em 'Courier New', sans-serif;
+    padding-left: 2em;
+    padding-right: 1em;
+    
+}
+
