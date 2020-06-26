@@ -1,9 +1,41 @@
 #content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+    height:100%;
+    width:100%;
 }
 
 #greeting-container {
   margin-top: 20px;
+}
+
+.toolbar {
+    margin-top: 5em;
+    margin-left: 5em;
+    display: flex;
+    flex-direction: row;
+    height: 5em;
+    align-items: center;
+    width: 100%;
+}
+
+.toolbar-links {
+    margin-right: "100px";
+    color: #0a2342;
+    font-size: 40px;
+    font-family: "Courier New";
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a { 
+    color: inherit;
+    display: inline-block;
+    text-decoration: none;
+   
+} 
+
+.icons-links {
+    margin-left: auto;
+    padding-right: 10em;
 }
