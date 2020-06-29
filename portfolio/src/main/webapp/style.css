@@ -20,8 +20,8 @@
 .toolbar-links {
     margin-right: "100px";
     color: #0a2342;
-    font-size: 40px;
-    font-family: "Courier New";
+    font: 2.5em "Courier New";
+    
 }
 
 a:hover {
@@ -38,4 +38,38 @@ a {
 .icons-links {
     margin-left: auto;
     padding-right: 10em;
+}
+
+.home-section1 {
+    margin-top: 5em;
+    margin-left: 10em;
+    display: flex;
+    flex-direction: row;
+}
+
+.home-section1-desc {
+    display: flex;
+    flex-direction: column;
+    color: #0a2342;
+    margin-left: 3em;
+    padding-right: 5em 
+}
+
+.home-name {
+    font: 4em 'Courier New', sans-serif;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.home-occupation {
+    font: 3em 'Courier New', sans-serif;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.home-about-desc {
+    font: 1.5em 'Courier New', sans-serif;
+}
+
+.self-portrait {
+    height: 25em;
+    width: 25em;
 }
