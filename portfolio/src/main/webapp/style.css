@@ -1,9 +1,14 @@
 body {
     margin: 0;
 }
+
 #content {
-    height: 40em;
     width: 100%;
+}
+
+#content-about {
+    width: 100%;
+    padding-bottom: 5em;
 }
 
 img {
