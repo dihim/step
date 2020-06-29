@@ -12,12 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* About page global variables */
+let imageIndex = 0;
+let images = ['dogs.jpg', 'ghana1.JPG', 'ghana2f.gif', 'ghana3f.gif'];
+
 /**
  * Adds a random greeting to the page.
  */
 function addRandomGreeting() {
   const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+      ['Spongebob Squarepants', 'Regular Show', 'Adventure Time', 'Dragon Ball Z', 'Wizards of Waverly Place', 'Tom and Jerry', 'Pokemon'];
 
   // Pick a random greeting.
   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
@@ -119,3 +123,26 @@ function arrayIntersect(array1, array2) {
 
     })
  }
+
+
+ /**
+  * Loads a new photo in the image gallery on about page
+  */ 
+function nextPhoto(direction) {
+  let image = document.getElementById('gallery-image');
+  
+  /* Determine which photo is show */
+  if (direction == 'left') {   
+    if (imageIndex == 0) {
+        imageIndex = images.length;
+    }
+    imageIndex--;
+    image.src = 'images/' + images[imageIndex]; 
+  } else {
+    if (imageIndex == images.length - 1) {
+        imageIndex = -1;
+    }
+    imageIndex++;
+    image.src = 'images/' + images[imageIndex]; 
+  }
+}
