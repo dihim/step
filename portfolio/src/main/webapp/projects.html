@@ -25,49 +25,58 @@
                 </a>
             </div>
         </div>
-        <h2>Projects</h2>
-        <ul>
-            <li> Web Photosharing Application </li>
-            <h4> Features</h4>
-            <ul>
-                <li> Register new users and login page</li>
-                <li> Upload photos and manage photo visibility</li>
-                <li> Comment under users'photos</li>
+        <div class="project-content">
+            <h2>Projects</h2>
+            <input id="html-check" onclick="filterProjects()" type="checkbox"> HTML
+            <input id="css-check" onclick="filterProjects()" type="checkbox">  CSS
+            <input id="js-check" onclick="filterProjects()" type="checkbox" > Javascript
+            <input id="python-check" onclick="filterProjects()" type="checkbox">  Python
+            <input id="node-check" onclick="filterProjects()" type="checkbox" >  NodeJS
+            <input id="react-check" onclick="filterProjects()" type="checkbox" > ReactJS
+            <input id="pi-check" onclick="filterProjects()" type="checkbox">  Raspberry Pi
+            <ul id="project-list">
+                <li> Web Photosharing Application </li>
+                <h4> Features</h4>
+                <ul>
+                    <li> Register new users and login page</li>
+                    <li> Upload photos and manage photo visibility</li>
+                    <li> Comment under users'photos</li>
+                </ul>
+                <h4> Technical Stack</h4>
+                <ul>
+                    <li> HTML</li>
+                    <li> Javascript</li>
+                    <li> CSS </li>
+                    <li> NodeJS </li>
+                    <li> ReactJS </li>
+                </ul>
+                <br></br>
+                <li> Website customization to send cutting and edging measurements to backend of Shopify</li>
+                <h4> Features</h4>
+                <ul>
+                    <li> User enters the dimensions of the cuts from a desired board</li>
+                    <li> Once a form is submitted, sends a request to the admin portal of Shopify, and identifies the form submission as a new order</li>
+                </ul>
+                <h4> Technical Stack</h4>
+                <ul>
+                    <li> HTML</li>
+                    <li> Javascript</li>
+                    <li> CSS </li>
+                    <li> NodeJS </li>
+                </ul>
+                <br></br>
+                <li> Security application to monitor ONEOK's wifi access points </li>
+                <h4> Features</h4>
+                <ul>
+                    <li> Routinely sends list of detectable wifi access point names to database </li>
+                </ul>
+                <h4> Technical Stack</h4>
+                <ul>
+                    <li> Python</li>
+                    <li> Raspberry Pi</li>
+                </ul>
             </ul>
-            <h4> Technical Stack</h4>
-            <ul>
-                <li> HTML</li>
-                <li> Javascript</li>
-                <li> CSS </li>
-                <li> NodeJS </li>
-                <li> ReactJS </li>
-            </ul>
-            <br></br>
-            <li> Website customization to send cutting and edging measurements to backend of Shopify</li>
-            <h4> Features</h4>
-            <ul>
-                <li> User enters the dimensions of the cuts from a desired board</li>
-                <li> Once a form is submitted, sends a request to the admin portal of Shopify, and identifies the form submission as a new order</li>
-            </ul>
-            <h4> Technical Stack</h4>
-            <ul>
-                <li> HTML</li>
-                <li> Javascript</li>
-                <li> CSS </li>
-                <li> NodeJS </li>
-            </ul>
-            <br></br>
-            <li> Security application to monitor ONEOK's wifi access points </li>
-            <h4> Features</h4>
-            <ul>
-                <li> Routinely sends list of detectable wifi access point names to database </li>
-            </ul>
-            <h4> Technical Stack</h4>
-            <ul>
-                <li> Python</li>
-                <li> Raspberry Pi</li>
-            </ul>
-        </ul>
+        </div>
     </div>
   </body>
 </html>
