@@ -6,6 +6,11 @@ body {
     width: 100%;
 }
 
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 #greeting-container {
   margin-top: 20px;
 }
@@ -41,6 +46,8 @@ a {
     margin-left: auto;
     padding-right: 10em;
 }
+
+/* Home page */
 
 .home-section1 {
     margin-top: 5em;
@@ -103,12 +110,72 @@ a {
     
 }
 
-img {
-    max-width: 100%;
-    max-height: 100%;
+/* About page */
+
+.about-hobbies-title {
+    background-color: #0a2342;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font: 2.5em 'Courier New', sans-serif;
 }
 
+.about-hobbies-content {
+    background-color: #0a2342;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-left: 5em;
+    font: 2em 'Courier New', sans-serif;
+}
+
+.about-image-title {
+    background-color: #0a2342;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font: 2.5em 'Courier New', sans-serif;
+}
+
+.about-image-content {
+    background-color: #0a2342;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-left: 5em;
+    padding-bottom: 5em;
+}
+
+.about-hobbies-content li {
+    display: inline-block;
+}
+
+.about-image-next-right {
+    color: white;
+    font-size: 3em;
+    padding-left: 1em;
+}
+
+.about-image-next-left {
+    color: white;
+    font-size: 3em;
+    padding-right: 1em;
+}
+
+.gallery-portrait {
+    height: 30em;
+    width: 30em;
+}
+
+
 /* Project Page */
+
 .project-content {
+    margin-left: 10em;
+}
+
+/* Contact page */
+
+.contact-content {
     margin-left: 10em;
 }
