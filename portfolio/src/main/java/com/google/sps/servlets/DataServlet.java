@@ -32,18 +32,23 @@ public class DataServlet extends HttpServlet {
   @Override
   public void init() {
     comments = new ArrayList<String>();
-    comments.add("Hi");
-    comments.add("Nice portfolio");
-    comments.add("Bro I love those pictures");
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-     String json = convertToJsonUsingGson(comments);
+    String json = convertToJsonUsingGson(comments);
 
     // Send the JSON as the response
     response.setContentType("application/json;");
     response.getWriter().println(json);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String comment = request.getParameter("comment");
+
+    comments.add(comment);
+    response.sendRedirect("contact.html");
   }
 
   /**
