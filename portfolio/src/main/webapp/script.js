@@ -148,7 +148,7 @@ function nextPhoto(direction) {
  * Get portfolio comments
  */
 async function getComments() {
-  let response = await fetch('/data');
+  let response = await fetch('/data?max-comments=3');
   let comments = await response.json();
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';

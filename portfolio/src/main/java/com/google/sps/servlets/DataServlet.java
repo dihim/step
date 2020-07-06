@@ -32,18 +32,22 @@ import com.google.gson.Gson;
 /** Servlet that returns greeting when requested */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Comment");
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-
+    int maxNumComments = getMaxComments(request);
+    
     // Select comments from datastore query
+    int index = 0;
     ArrayList comments = new ArrayList<String>();
     for (Entity entity : results.asIterable()) {
+      if (index == maxNumComments) break;
       String text = (String) entity.getProperty("text");
       comments.add(text);
+      index++;
     }
     String json = convertToJsonUsingGson(comments);
 
@@ -55,7 +59,6 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String comment = request.getParameter("comment");
-
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("text", comment);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -71,6 +74,23 @@ public class DataServlet extends HttpServlet {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     return json;
+  }
+
+  /** Returns the choice entered by the player, or -1 if the choice was invalid. */
+  private int getMaxComments(HttpServletRequest request) {
+    // Get the input from the form.
+    String numComments = request.getParameter("max-comments");
+
+    // Convert the input to an int.
+    int maxNum;
+    try {
+      maxNum = Integer.parseInt(numComments);
+    } catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + numComments);
+      return -1;
+    }
+
+    return maxNum;
   }
 }
 
