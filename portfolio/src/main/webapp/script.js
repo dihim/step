@@ -143,3 +143,34 @@ function nextPhoto(direction) {
     image.src = 'images/' + images[imageIndex]; 
   }
 }
+
+/** 
+ * Get portfolio comments
+ */
+async function getComments() {
+  let response = await fetch('/data');
+  let comments = await response.json();
+  const commentsListElement = document.getElementById('comments-container');
+  commentsListElement.innerHTML = '';
+  comments.forEach(comment => commentsListElement.appendChild(createListElement(comment)));
+ 
+ 
+}
+
+/** 
+ * Creates an <li> element containing text. 
+ */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
+
+/**
+ * Loads comments on the page 
+ */
+window.onload = function() {
+  if (window.location.href.indexOf('contact.html') != -1) {
+    getComments();
+  }
+}
