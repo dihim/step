@@ -153,8 +153,6 @@ async function getComments(num) {
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
   comments.forEach(comment => commentsListElement.appendChild(createListElement(comment)));
- 
- 
 }
 
 /** 
