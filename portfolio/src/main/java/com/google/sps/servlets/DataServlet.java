@@ -39,7 +39,7 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     int maxNumComments = getMaxComments(request);
-    
+
     // Select comments from datastore query
     int index = 0;
     ArrayList comments = new ArrayList<String>();

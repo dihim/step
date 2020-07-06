@@ -36,7 +36,11 @@
             <h2>Comments</h2>
             <form action="/data" method="POST">
             <input type="text" name="comment">
-            <input type="submit" />
+            <input type="submit" /> 
+            &nbsp;
+            Number of Comments <input type="number" onchange="getComments(this.value)" id="max-comments" min="0" style="width: 3em;" name="max-comments">
+            &nbsp;
+            <button type="button" onclick="removeComments()"> Delete Comments</button>
             </form>
             <ul id="comments-container"></ul>
         </div>
