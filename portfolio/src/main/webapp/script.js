@@ -17,18 +17,15 @@ let imageIndex = 0;
 let images = ['dogs.jpg', 'ghana1.JPG', 'ghana2f.gif', 'ghana3f.gif'];
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random tv show to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Spongebob Squarepants', 'Regular Show', 'Adventure Time', 'Dragon Ball Z', 'Wizards of Waverly Place', 'Tom and Jerry', 'Pokemon'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+async function addRandomShow() {
+  const response = await fetch('/random-show');
+  const show = await response.text();
 
   // Add it to the page.
   const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  greetingContainer.innerText = show;
 }
 
 /**
