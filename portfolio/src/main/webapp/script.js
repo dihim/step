@@ -178,7 +178,7 @@ function createListElement(text) {
  * Loads comments on the page 
  */
 window.onload = function() {
-  if (window.location.href.indexOf('contact.html') != -1) {
+  if (window.location.href.indexOf('forum.html') != -1) {
     getComments();
   }
 }

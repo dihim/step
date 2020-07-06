@@ -63,7 +63,7 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty("text", comment);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
-    response.sendRedirect("contact.html");
+    response.sendRedirect("forum.html");
   }
 
   /**
