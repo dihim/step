@@ -19,7 +19,8 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-
+import com.google.appengine.api.datastore.Query.SortDirection;
+import java.util.Date;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment");
+    Query query = new Query("Comment").addSort("time", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     int maxNumComments = getMaxComments(request);
@@ -49,7 +50,8 @@ public class DataServlet extends HttpServlet {
       if (index == maxNumComments) break;
       String text = (String) entity.getProperty("text");
       String email = (String) entity.getProperty("userEmail");
-      comments.add(email + ": " + text);
+      Date time = (Date) entity.getProperty("time");
+      comments.add(email + ": " + text + " -" + time);
       index++;
     }
     String json = convertToJsonUsingGson(comments);
@@ -65,13 +67,15 @@ public class DataServlet extends HttpServlet {
     if (userService.isUserLoggedIn()) {
       String comment = request.getParameter("comment");
       String userEmail = userService.getCurrentUser().getEmail();
+      Date postedTime = new Date();
       Entity commentEntity = new Entity("Comment");
       commentEntity.setProperty("text", comment);
       commentEntity.setProperty("userEmail", userEmail);
+      commentEntity.setProperty("time", postedTime);
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
-      response.sendRedirect("forum.html");
     }
+    response.sendRedirect("forum.html");
   }
 
   /**
