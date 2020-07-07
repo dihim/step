@@ -173,10 +173,23 @@ function createListElement(text) {
 }
 
 /**
- * Loads comments on the page 
+ * Loads comments on the page if user is logged in
  */
-window.onload = function() {
+window.onload = async function() {
   if (window.location.href.indexOf('forum.html') != -1) {
-    getComments();
+    let response = await fetch('/login-user');
+    let userInfo = await response.json();
+
+    // Check if user is logged in
+    if (userInfo.loggedIn == 'true') {
+      let logoutBtn = document.getElementById('forum-logout');
+      logoutBtn.href = userInfo.logoutUrl;
+      getComments();
+      
+    } else {
+      let forumContentElement = document.getElementById('forum-content');
+      forumContentElement.innerHTML = "<h2>Hello stranger.</h2>";
+      forumContentElement.innerHTML += "<p>Login <a href=\"" + userInfo.loginUrl + "\">here</a> to join the chat room!.</p>";
+    }
   }
 }
