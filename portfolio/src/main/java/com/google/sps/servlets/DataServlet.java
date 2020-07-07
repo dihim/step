@@ -20,6 +20,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -46,7 +48,8 @@ public class DataServlet extends HttpServlet {
     for (Entity entity : results.asIterable()) {
       if (index == maxNumComments) break;
       String text = (String) entity.getProperty("text");
-      comments.add(text);
+      String email = (String) entity.getProperty("userEmail");
+      comments.add(email + ": " + text);
       index++;
     }
     String json = convertToJsonUsingGson(comments);
@@ -58,12 +61,17 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment = request.getParameter("comment");
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("text", comment);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(commentEntity);
-    response.sendRedirect("forum.html");
+    UserService userService = UserServiceFactory.getUserService();
+    if (userService.isUserLoggedIn()) {
+      String comment = request.getParameter("comment");
+      String userEmail = userService.getCurrentUser().getEmail();
+      Entity commentEntity = new Entity("Comment");
+      commentEntity.setProperty("text", comment);
+      commentEntity.setProperty("userEmail", userEmail);
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(commentEntity);
+      response.sendRedirect("forum.html");
+    }
   }
 
   /**
