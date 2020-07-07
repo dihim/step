@@ -147,14 +147,22 @@ function nextPhoto(direction) {
 /** 
  * Get portfolio comments
  */
-async function getComments() {
-  let response = await fetch('/data');
+async function getComments(num) {
+  let response = await fetch('/data?max-comments=' + num);
   let comments = await response.json();
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
   comments.forEach(comment => commentsListElement.appendChild(createListElement(comment)));
  
  
+}
+
+/** 
+ * Removes all comments
+ */
+async function removeComments() {
+  await fetch('/delete-data', {method: 'POST'});
+  getComments();
 }
 
 /** 
