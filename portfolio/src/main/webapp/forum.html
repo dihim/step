@@ -26,13 +26,23 @@
                 </a>
             </div>
         </div>
-        <div class="contact-content">
-            <h2>Contact me!</h2>
-            <a target="_blank" href="https://www.linkedin.com/in/david-ihim-404750143"> LinkedIn </a>
+        <div id="forum-content">
+            <div class="forum-title">
+                <h2>Comments</h2>
+                &nbsp;
+                <a id="forum-logout" href="">
+                    <button type="button">Log out</button>
+                </a>
+            </div>
+            <form action="/data" method="POST">
+            <input type="text" name="comment">
+            <input type="submit" /> 
             &nbsp;
-            <a target="_blank" href="https://github.com/dihim"> Github </a>
+            Number of Comments <input type="number" onchange="getComments(this.value)" id="max-comments" min="0" style="width: 3em;" name="max-comments">
             &nbsp;
-            <a target="_blank" href="mailto:ihimdavid@gmail.com"> Email </a>
+            <button type="button" onclick="removeComments()"> Delete Comments</button>
+            </form>
+            <ul id="comments-container"></ul>
         </div>
     </div>
   </body>
