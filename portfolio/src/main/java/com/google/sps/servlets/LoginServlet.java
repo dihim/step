@@ -54,7 +54,8 @@ public class LoginServlet extends HttpServlet {
       response.getWriter().println(convertToJsonUsingGson(userInfo));
     }
   }
-
+  
+  /* Convert HashMap<String, String> to JSON using gson*/
   private String convertToJsonUsingGson(HashMap<String, String> userInfo) {
     Gson gson = new Gson();
     String json = gson.toJson(userInfo);
