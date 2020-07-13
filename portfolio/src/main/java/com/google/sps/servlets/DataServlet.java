@@ -100,7 +100,7 @@ public class DataServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
 
     if (userService.isUserLoggedIn()) {
-      String imageUrl = getUploadedFileUrl(request, "image");
+      String bKey = request.getParameter(request, "image");
       String comment = request.getParameter("comment");
       String userEmail = userService.getCurrentUser().getEmail();
       Date postedTime = new Date();
