@@ -29,10 +29,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/blobstore-serve")
 public class BlobstoreServeServlet extends HttpServlet {
-
+   private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    BlobKey blobKey = new BlobKey(req.getParameter("blob-key"));
-    blobstoreService.serve(blobKey, res);
+    BlobKey blobKey = new BlobKey(request.getParameter("blob-key"));
+    blobstoreService.serve(blobKey, response);
   }
 }
