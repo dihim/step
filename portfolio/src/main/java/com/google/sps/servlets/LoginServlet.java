@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 @WebServlet("/login-user")
 public class LoginServlet extends HttpServlet {
 
+  /* Checks if user is logged in and stores user information */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
@@ -53,7 +54,8 @@ public class LoginServlet extends HttpServlet {
       response.getWriter().println(convertToJsonUsingGson(userInfo));
     }
   }
-
+  
+  /* Convert HashMap<String, String> to JSON using gson*/
   private String convertToJsonUsingGson(HashMap<String, String> userInfo) {
     Gson gson = new Gson();
     String json = gson.toJson(userInfo);
