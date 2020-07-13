@@ -152,7 +152,12 @@ async function getComments(num) {
   let comments = await response.json();
   const commentsListElement = document.getElementById('comments-container');
   commentsListElement.innerHTML = '';
-  comments.forEach(comment => commentsListElement.appendChild(createListElement(comment)));
+  comments.forEach(comment => { 
+      let image
+      comment.imageUrl ? image = "<img src=\"" + comment.imageUrl + "\" /> <br></br>" : image = "";
+      let formatComment = image + comment.email + ": " + comment.text + " -" + comment.time + " (Sentiment: " + comment.sentiment + ")";
+      commentsListElement.appendChild(createListElement(formatComment))
+  });
 }
 
 /** 
@@ -168,7 +173,7 @@ async function removeComments() {
  */
 function createListElement(text) {
   const liElement = document.createElement('li');
-  liElement.innerText = text;
+  liElement.innerHTML = text;
   return liElement;
 }
 
@@ -177,6 +182,14 @@ function createListElement(text) {
  */
 window.onload = async function() {
   if (window.location.href.indexOf('forum.html') != -1) {
+    // Feteches blobstore url for photo uploads
+    let blobResponse = await fetch('/blobstore-upload-url', {method: 'GET'})
+    let imageUploadUrl = await blobResponse.text();
+    console.log(imageUploadUrl);
+    let messageForm = document.getElementById('my-form');
+    messageForm.action = imageUploadUrl;
+    messageForm.classList.remove('hidden');
+
     let response = await fetch('/login-user');
     let userInfo = await response.json();
 
@@ -193,3 +206,5 @@ window.onload = async function() {
     }
   }
 }
+
+
