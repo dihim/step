@@ -50,7 +50,7 @@ import com.google.gson.Gson;
 /** Servlet that returns greeting when requested */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
+  /* Returns the stored comments in database */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Comment").addSort("time", SortDirection.DESCENDING);
@@ -76,7 +76,8 @@ public class DataServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
-
+  
+  /* Store the data for each comment when user is logged in*/
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
@@ -128,16 +129,5 @@ public class DataServlet extends HttpServlet {
     return maxNum;
   }
 
-   static void authImplicit() {
-  // If you don't specify credentials when constructing the client, the client library will
-  // look for credentials via the environment variable GOOGLE_APPLICATION_CREDENTIALS.
-  Storage storage = StorageOptions.getDefaultInstance().getService();
-
-  System.out.println("Buckets:");
-  Page<Bucket> buckets = storage.list();
-  for (Bucket bucket : buckets.iterateAll()) {
-    System.out.println(bucket.toString());
-  }
- }
 }
 
