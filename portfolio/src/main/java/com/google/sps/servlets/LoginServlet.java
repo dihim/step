@@ -23,11 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import com.google.gson.Gson;
 
-
-
 @WebServlet("/login-user")
 public class LoginServlet extends HttpServlet {
-
   /* Checks if user is logged in and stores user information */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
