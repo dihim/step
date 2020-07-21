@@ -14,15 +14,30 @@
 
 package com.google.sps.servlets;
 
+
+import com.google.api.gax.paging.Page;
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.BucketInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+
 import java.util.Date;
+
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -35,7 +50,7 @@ import com.google.gson.Gson;
 /** Servlet that returns greeting when requested */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
+  /* Returns the stored comments in database */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Comment").addSort("time", SortDirection.DESCENDING);
@@ -51,7 +66,8 @@ public class DataServlet extends HttpServlet {
       String text = (String) entity.getProperty("text");
       String email = (String) entity.getProperty("userEmail");
       Date time = (Date) entity.getProperty("time");
-      comments.add(email + ": " + text + " -" + time);
+      String score = (String) entity.getProperty("sentimentScore");
+      comments.add(email + ": " + text + " -" + time + " (Sentiment: " + score + ")");
       index++;
     }
     String json = convertToJsonUsingGson(comments);
@@ -60,15 +76,23 @@ public class DataServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
-
+  
+  /* Store the data for each comment when user is logged in*/
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
+
     if (userService.isUserLoggedIn()) {
       String comment = request.getParameter("comment");
       String userEmail = userService.getCurrentUser().getEmail();
       Date postedTime = new Date();
       Entity commentEntity = new Entity("Comment");
+      Document doc = Document.newBuilder().setContent(comment).setType(Document.Type.PLAIN_TEXT).build();
+      LanguageServiceClient languageService = LanguageServiceClient.create();
+      Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+      float score = sentiment.getScore();
+      languageService.close();
+      commentEntity.setProperty("sentimentScore", String.valueOf(score));
       commentEntity.setProperty("text", comment);
       commentEntity.setProperty("userEmail", userEmail);
       commentEntity.setProperty("time", postedTime);
@@ -104,5 +128,6 @@ public class DataServlet extends HttpServlet {
 
     return maxNum;
   }
+
 }
 
